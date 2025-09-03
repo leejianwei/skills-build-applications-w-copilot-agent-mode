@@ -26,4 +26,3 @@ class Command(BaseCommand):
         Activity.objects.create(user=user3, type='Swimming', duration=60, date=timezone.now())
 
         self.stdout.write(self.style.SUCCESS('Test data populated successfully.'))
-
