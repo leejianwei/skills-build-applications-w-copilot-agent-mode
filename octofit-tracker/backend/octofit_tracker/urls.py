@@ -22,12 +22,15 @@ from . import views
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'teams', views.TeamViewSet)
 router.register(r'activities', views.ActivityViewSet)
 router.register(r'workouts', views.WorkoutViewSet)
 router.register(r'leaderboard', views.LeaderboardViewSet)
+
+from django.urls import re_path
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -38,6 +41,12 @@ def api_root(request, format=None):
         'workouts': '/api/workouts/',
         'leaderboard': '/api/leaderboard/',
     })
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+    path('', api_root, name='api-root'),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
